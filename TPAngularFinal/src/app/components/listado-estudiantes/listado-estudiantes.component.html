@@ -1,0 +1,33 @@
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Dni</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let estudiante of listadoEstudiantes">
+            <td>{{estudiante.id}}</td>
+            <td>{{estudiante.dni}}</td>
+            <td>{{estudiante.lastName}}</td>
+            <td>{{estudiante.firstName}}</td>
+            <td>{{estudiante.email}}</td>
+            <td><button (click)="ver(estudiante)">Ver</button></td>
+            <td><button (click)="borrar(estudiante.id)">Borrar</button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th><input [(ngModel)]="dni"></th>
+            <th><input [(ngModel)]="apellido"></th>
+            <th><input [(ngModel)]="nombre"></th>
+            <th><input [(ngModel)]="email"></th>
+            <th colspan="2"><button (click)="agregar()">Agregar</button></th>
+        </tr>
+    </tfoot>
+</table>
