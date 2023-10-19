@@ -16,7 +16,7 @@
             <td>{{estudiante.lastName}}</td>
             <td>{{estudiante.firstName}}</td>
             <td>{{estudiante.email}}</td>
-            <td><button (click)="ver(estudiante)">Ver</button></td>
+            <td><button (click)="vista(ver, estudiante)">Ver</button></td>
             <td><button (click)="borrar(estudiante.id)">Borrar</button></td>
         </tr>
     </tbody>
@@ -31,3 +31,23 @@
         </tr>
     </tfoot>
 </table>
+<ng-template #ver let-modal>
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-body">
+        <label>Id:</label>
+        <input class="form-control" [(ngModel)]="id2" readonly>
+        <label>Dni:</label>
+        <input class="form-control" [(ngModel)]="dni2" ngbAutofocus>
+        <label>Apellido:</label>
+        <input class="form-control" [(ngModel)]="apellido2">
+        <label>Nombre:</label>
+        <input class="form-control" [(ngModel)]="nombre2">
+        <label>Email:</label>
+        <input class="form-control" [(ngModel)]="email2">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+    </div>
+</ng-template>
