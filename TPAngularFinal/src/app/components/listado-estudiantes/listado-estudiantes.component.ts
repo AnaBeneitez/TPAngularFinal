@@ -11,7 +11,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ListadoEstudiantesComponent implements OnInit {
 
-
   listadoEstudiantes = new Array<EstudianteModelModule>();
   estudiante = new EstudianteModelModule()
   estudianteForm: FormGroup
@@ -22,7 +21,6 @@ export class ListadoEstudiantesComponent implements OnInit {
     this.estudiante.lastName = ""
     this.estudiante.firstName = ""
     this.estudiante.email = ""
-
 
     this.estudianteForm = new FormGroup({
       "dni": new FormControl(this.estudiante.dni, Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])),
@@ -65,18 +63,18 @@ export class ListadoEstudiantesComponent implements OnInit {
   }
 
   agregar() {
-    let s = new EstudianteModelModule()
-    s.dni = this.estudiante.dni
-    s.lastName = this.estudiante.lastName
-    s.firstName = this.estudiante.firstName
-    s.email = this.estudiante.email
-    s.cohort = 0
-    s.status = 'activo'
-    s.gender = 'masculino'
-    s.adress = 'abc123'
-    s.phone = '000'
+    let e = new EstudianteModelModule()
+    e.dni = this.estudiante.dni
+    e.lastName = this.estudiante.lastName
+    e.firstName = this.estudiante.firstName
+    e.email = this.estudiante.email
+    e.cohort = 0
+    e.status = 'activo'
+    e.gender = 'masculino'
+    e.adress = 'abc123'
+    e.phone = '000'
 
-    this.estServicio.agregar(s).subscribe(() => {
+    this.estServicio.agregar(e).subscribe(() => {
       location.reload()
     }, error => {
       console.error(error)
@@ -85,17 +83,17 @@ export class ListadoEstudiantesComponent implements OnInit {
     })
   }
 
-  vista(ver: any, s: EstudianteModelModule) {
-    this.id2 = s.id
-    this.dni2 = s.dni
-    this.apellido2 = s.lastName
-    this.nombre2 = s.firstName
-    this.email2 = s.email
+  vista(ver: any, e: EstudianteModelModule) {
+    this.id2 = e.id
+    this.dni2 = e.dni
+    this.apellido2 = e.lastName
+    this.nombre2 = e.firstName
+    this.email2 = e.email
 
-    this.dni3 = s.dni
-    this.apellido3 = s.lastName
-    this.nombre3 = s.firstName
-    this.email3 = s.email
+    this.dni3 = e.dni
+    this.apellido3 = e.lastName
+    this.nombre3 = e.firstName
+    this.email3 = e.email
 
     this.modalServicio.open(ver).result.then(() => {
       if(this.dni2.trim() !== '' && this.apellido2.trim() !== '' && this.nombre2.trim() !== '' && this.email2.trim() !== '' && 

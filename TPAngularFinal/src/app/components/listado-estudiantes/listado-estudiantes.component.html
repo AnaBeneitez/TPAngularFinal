@@ -24,28 +24,28 @@
 
 <form [formGroup]="estudianteForm" style="border: 1px solid;">
     <input type="number -spinner" style="margin-top: 3%;" class="form-control" formControlName="dni" placeholder="Ingrese el DNI">
-        <span *ngIf="this.estudianteForm.get('dni')?.errors?.['required'] && this.estudianteForm.get('dni')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
-        <span *ngIf="this.estudianteForm.get('dni')?.errors?.['pattern']" style="color: red">
-            (DNI inválido)
-        </span>
+    <span *ngIf="this.estudianteForm.get('dni')?.errors?.['required'] && this.estudianteForm.get('dni')?.touched" style="color: red">
+        (El nombre no puede quedar vacío)
+    </span>
+    <span *ngIf="this.estudianteForm.get('dni')?.errors?.['pattern']" style="color: red">
+        (DNI inválido)
+    </span>
     <input type="text" class="form-control" formControlName="apellido" placeholder="Ingrese el apellido">
-        <span *ngIf="this.estudianteForm.get('apellido')?.errors?.['required'] && this.estudianteForm.get('apellido')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
+    <span *ngIf="this.estudianteForm.get('apellido')?.errors?.['required'] && this.estudianteForm.get('apellido')?.touched" style="color: red">
+        (El nombre no puede quedar vacío)
+    </span>
     <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre">
-        <span *ngIf="this.estudianteForm.get('nombre')?.errors?.['required'] && this.estudianteForm.get('nombre')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
+    <span *ngIf="this.estudianteForm.get('nombre')?.errors?.['required'] && this.estudianteForm.get('nombre')?.touched" style="color: red">
+        (El nombre no puede quedar vacío)
+    </span>
     <input type="email" class="form-control" formControlName="email" placeholder="Ingrese el email">    
-        <span *ngIf="this.estudianteForm.get('email')?.errors?.['required'] && this.estudianteForm.get('email')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
-        <span *ngIf="this.estudianteForm.get('email')?.errors?.['email']" style="color: red">
-            (Email inválido)
-        </span>
-        <div style="text-align: center" style="margin-top: 5%; margin-bottom: 3%; margin-left: 32%;"><button class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="!estudianteForm.valid">Agregar</button></div>
+    <span *ngIf="this.estudianteForm.get('email')?.errors?.['required'] && this.estudianteForm.get('email')?.touched" style="color: red">
+        (El nombre no puede quedar vacío)
+    </span>
+    <span *ngIf="this.estudianteForm.get('email')?.errors?.['email']" style="color: red">
+        (Email inválido)
+    </span>
+    <div style="text-align: center" style="margin-top: 5%; margin-bottom: 3%; margin-left: 32%;"><button class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="!estudianteForm.valid">Agregar</button></div>
 </form>
 
 
