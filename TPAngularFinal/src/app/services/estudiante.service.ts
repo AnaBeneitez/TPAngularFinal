@@ -8,7 +8,7 @@ import { EstudianteModelModule } from '../models/estudiante-model/estudiante-mod
 })
 export class EstudianteService {
 
-  private url = 'https://97c7-190-192-242-155.ngrok-free.app/student'
+  private url = 'https://cb95-181-231-122-56.ngrok-free.app/student'
 
   constructor(private http: HttpClient) { }
 
