@@ -12,8 +12,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ListadoEstudiantesComponent implements OnInit {
 
   listadoEstudiantes = new Array<EstudianteModelModule>();
+
   estudiante = new EstudianteModelModule()
   estudianteForm: FormGroup
+
+  modalForm: FormGroup
+  modalEstudiante = new EstudianteModelModule()
 
   constructor(private estServicio: EstudianteService, private modalServicio: NgbModal){
 
@@ -27,6 +31,13 @@ export class ListadoEstudiantesComponent implements OnInit {
       "apellido": new FormControl(this.estudiante.lastName, Validators.required),
       "nombre": new FormControl(this.estudiante.firstName, Validators.required),
       "email": new FormControl(this.estudiante.email, Validators.compose([Validators.required, Validators.email]))
+    })
+
+    this.modalForm = new FormGroup ({
+      "dni2": new FormControl(this.modalEstudiante.dni, Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])),
+      "apellido2": new FormControl(this.modalEstudiante.lastName, Validators.required),
+      "nombre2": new FormControl(this.modalEstudiante.firstName, Validators.required),
+      "email2": new FormControl(this.modalEstudiante.email, Validators.compose([Validators.required, Validators.email]))
     })
   }
 
@@ -96,8 +107,7 @@ export class ListadoEstudiantesComponent implements OnInit {
     this.email3 = e.email
 
     this.modalServicio.open(ver).result.then(() => {
-      if(this.dni2.trim() !== '' && this.apellido2.trim() !== '' && this.nombre2.trim() !== '' && this.email2.trim() !== '' && 
-      (this.dni2.trim() !== this.dni3.trim() || this.apellido2.trim() !== this.apellido3.trim() || this.nombre2.trim() !== this.nombre3.trim() || this.email2.trim() !== this.email3.trim())) {
+      if(this.dni2.trim() !== this.dni3.trim() || this.apellido2.trim() !== this.apellido3.trim() || this.nombre2.trim() !== this.nombre3.trim() || this.email2.trim() !== this.email3.trim()) {
         let s = new EstudianteModelModule()
         s.id = this.id2
         s.dni = this.dni2
@@ -118,6 +128,8 @@ export class ListadoEstudiantesComponent implements OnInit {
         })
       }
     })
+    
+    this.modalForm.reset()
     this.estudiante.dni = ""
     this.estudiante.lastName = ""
     this.estudiante.firstName = ""
