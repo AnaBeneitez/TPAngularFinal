@@ -34,18 +34,13 @@ export class ListadoEstudiantesComponent implements OnInit {
     })
 
     this.modalForm = new FormGroup ({
+      "id2": new FormControl(this.modalEstudiante.id, Validators.required),
       "dni2": new FormControl(this.modalEstudiante.dni, Validators.compose([Validators.required, Validators.pattern("^[0-9]+$")])),
       "apellido2": new FormControl(this.modalEstudiante.lastName, Validators.required),
       "nombre2": new FormControl(this.modalEstudiante.firstName, Validators.required),
       "email2": new FormControl(this.modalEstudiante.email, Validators.compose([Validators.required, Validators.email]))
     })
   }
-
-  id2: number
-  dni2: string
-  apellido2: string
-  nombre2: string
-  email2: string
 
   dni3: string
   apellido3: string
@@ -55,6 +50,18 @@ export class ListadoEstudiantesComponent implements OnInit {
   ngOnInit(): void {
     this.listarAlumnos()
   }
+
+  get dni(){return this.estudianteForm.get("dni")}
+  get apellido() {return this.estudianteForm.get("apellido")}
+  get nombre() {return this.estudianteForm.get("nombre")}
+  get email() {return this.estudianteForm.get("email")}
+
+  get id2() {return this.modalForm.get("id2")}
+  get dni2(){return this.modalForm.get("dni2")}
+  get apellido2() {return this.modalForm.get("apellido2")}
+  get nombre2() {return this.modalForm.get("nombre2")}
+  get email2() {return this.modalForm.get("email2")}
+
 
   listarAlumnos() {
     this.estServicio.listarAlumnos().subscribe(response => {
@@ -75,10 +82,10 @@ export class ListadoEstudiantesComponent implements OnInit {
 
   agregar() {
     let e = new EstudianteModelModule()
-    e.dni = this.estudiante.dni
-    e.lastName = this.estudiante.lastName
-    e.firstName = this.estudiante.firstName
-    e.email = this.estudiante.email
+    e.dni = this.dni?.value
+    e.lastName = this.apellido?.value
+    e.firstName = this.nombre?.value
+    e.email = this.email?.value
     e.cohort = 0
     e.status = 'activo'
     e.gender = 'masculino'
@@ -95,11 +102,14 @@ export class ListadoEstudiantesComponent implements OnInit {
   }
 
   vista(ver: any, e: EstudianteModelModule) {
-    this.id2 = e.id
-    this.dni2 = e.dni
-    this.apellido2 = e.lastName
-    this.nombre2 = e.firstName
-    this.email2 = e.email
+
+    this.modalEstudiante.id = e.id
+    this.modalEstudiante.dni = e.dni
+    this.modalEstudiante.lastName = e.lastName
+    this.modalEstudiante.firstName = e.firstName
+    this.modalEstudiante.email = e.email
+
+    console.log(this.modalEstudiante)
 
     this.dni3 = e.dni
     this.apellido3 = e.lastName
@@ -107,13 +117,13 @@ export class ListadoEstudiantesComponent implements OnInit {
     this.email3 = e.email
 
     this.modalServicio.open(ver).result.then(() => {
-      if(this.dni2.trim() !== this.dni3.trim() || this.apellido2.trim() !== this.apellido3.trim() || this.nombre2.trim() !== this.nombre3.trim() || this.email2.trim() !== this.email3.trim()) {
+      if(this.modalEstudiante.dni.trim() !== this.dni3.trim() || this.modalEstudiante.lastName.trim() !== this.apellido3.trim() || this.modalEstudiante.firstName.trim() !== this.nombre3.trim() || this.modalEstudiante.email.trim() !== this.email3.trim()) {
         let s = new EstudianteModelModule()
-        s.id = this.id2
-        s.dni = this.dni2
-        s.lastName = this.apellido2
-        s.firstName = this.nombre2
-        s.email = this.email2
+        s.id = this.modalEstudiante.id
+        s.dni = this.dni2?.value
+        s.lastName = this.apellido2?.value
+        s.firstName = this.nombre2?.value
+        s.email = this.email2?.value
         s.cohort = 0
         s.status = 'activo'
         s.gender = 'masculino'
