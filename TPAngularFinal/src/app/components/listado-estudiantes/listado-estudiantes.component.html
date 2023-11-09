@@ -53,37 +53,19 @@
     <div class="modal-header">
         <h5 class="modal-title">Datos estudiante</h5>
         <button class="close" aria-label="Close" (click)="modal.dismiss()"><span aria-hidden="true">&times;</span></button>    </div>
-    <div class="modal-body" [formGroup]="modalForm">
+    <div class="modal-body">
         <label>Id:</label>
-        <input class="form-control" formControlName="id2" readonly>
+        <input class="form-control" [(ngModel)]="id2" readonly>
         <label>Dni:</label>
-        <input class="form-control" formControlName="dni2" ngbAutofocus>
-        <span *ngIf="this.modalForm.get('dni2')?.errors?.['required'] && this.modalForm.get('dni2')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
-        <span *ngIf="this.modalForm.get('dni2')?.errors?.['pattern']" style="color: red">
-            (DNI inválido)
-        </span><br>
+        <input class="form-control" [(ngModel)]="dni2" ngbAutofocus>
         <label>Apellido:</label>
-        <input class="form-control" formControlName="apellido2">
-        <span *ngIf="this.modalForm.get('apellido2')?.errors?.['required'] && this.modalForm.get('apellido2')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span><br>
+        <input class="form-control" [(ngModel)]="apellido2">
         <label>Nombre:</label>
-        <input class="form-control" formControlName="nombre2">
-        <span *ngIf="this.modalForm.get('nombre2')?.errors?.['required'] && this.modalForm.get('nombre2')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span><br>
+        <input class="form-control" [(ngModel)]="nombre2">
         <label>Email:</label>
-        <input class="form-control" formControlName="email2">
-        <span *ngIf="this.modalForm.get('email2')?.errors?.['required'] && this.modalForm.get('email2')?.touched" style="color: red">
-            (El nombre no puede quedar vacío)
-        </span>
-        <span *ngIf="this.modalForm.get('email2')?.errors?.['email']" style="color: red">
-            (Email inválido)
-        </span>
+        <input class="form-control" [(ngModel)]="email2">
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" [disabled]="!modalForm.valid" (click)="modal.close()">Actualizar</button>
+        <button class="btn btn-primary" (click)="modal.close()">Actualizar</button>
     </div>
 </ng-template>
