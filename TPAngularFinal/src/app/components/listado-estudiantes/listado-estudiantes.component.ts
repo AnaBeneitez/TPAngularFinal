@@ -142,5 +142,4 @@ export class ListadoEstudiantesComponent implements OnInit {
       alert('Error: ' + error.error.message)
     })
   }
-
 }
