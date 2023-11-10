@@ -12,8 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ListadoEstudiantesComponent implements OnInit {
 
   listadoEstudiantes = new Array<EstudianteModelModule>();
+
   estudiante = new EstudianteModelModule()
   estudianteForm: FormGroup
+
 
   constructor(private estServicio: EstudianteService, private modalServicio: NgbModal){
 
@@ -28,6 +30,7 @@ export class ListadoEstudiantesComponent implements OnInit {
       "nombre": new FormControl(this.estudiante.firstName, Validators.required),
       "email": new FormControl(this.estudiante.email, Validators.compose([Validators.required, Validators.email]))
     })
+
   }
 
   id2: number
@@ -44,6 +47,11 @@ export class ListadoEstudiantesComponent implements OnInit {
   ngOnInit(): void {
     this.listarAlumnos()
   }
+
+  get dni(){return this.estudianteForm.get("dni")}
+  get apellido() {return this.estudianteForm.get("apellido")}
+  get nombre() {return this.estudianteForm.get("nombre")}
+  get email() {return this.estudianteForm.get("email")}
 
   listarAlumnos() {
     this.estServicio.listarAlumnos().subscribe(response => {
@@ -64,10 +72,10 @@ export class ListadoEstudiantesComponent implements OnInit {
 
   agregar() {
     let e = new EstudianteModelModule()
-    e.dni = this.estudiante.dni
-    e.lastName = this.estudiante.lastName
-    e.firstName = this.estudiante.firstName
-    e.email = this.estudiante.email
+    e.dni = this.dni?.value
+    e.lastName = this.apellido?.value
+    e.firstName = this.nombre?.value
+    e.email = this.email?.value
     e.cohort = 0
     e.status = 'activo'
     e.gender = 'masculino'
@@ -84,6 +92,7 @@ export class ListadoEstudiantesComponent implements OnInit {
   }
 
   vista(ver: any, e: EstudianteModelModule) {
+
     this.id2 = e.id
     this.dni2 = e.dni
     this.apellido2 = e.lastName
@@ -96,7 +105,7 @@ export class ListadoEstudiantesComponent implements OnInit {
     this.email3 = e.email
 
     this.modalServicio.open(ver).result.then(() => {
-      if(this.dni2.trim() !== '' && this.apellido2.trim() !== '' && this.nombre2.trim() !== '' && this.email2.trim() !== '' && 
+      if(this.dni2.trim() !== '' && this.apellido2.trim() !== '' && this.nombre2.trim() !== '' && this.email2.trim() !== '' &&
       (this.dni2.trim() !== this.dni3.trim() || this.apellido2.trim() !== this.apellido3.trim() || this.nombre2.trim() !== this.nombre3.trim() || this.email2.trim() !== this.email3.trim())) {
         let s = new EstudianteModelModule()
         s.id = this.id2
@@ -118,6 +127,7 @@ export class ListadoEstudiantesComponent implements OnInit {
         })
       }
     })
+    
     this.estudiante.dni = ""
     this.estudiante.lastName = ""
     this.estudiante.firstName = ""
@@ -132,5 +142,4 @@ export class ListadoEstudiantesComponent implements OnInit {
       alert('Error: ' + error.error.message)
     })
   }
-
 }
